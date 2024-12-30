@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Management System Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --sidebar-width: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            display: flex;
+        }
+        img {
+    max-width: 100%; /* Makes the image responsive */
+    height: auto;    /* Maintains aspect ratio */
+}
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            background: white;
+            padding: 2rem;
+            border-right: 1px solid #e2e8f0;
+            overflow-y: auto;
+        }
+
+        .content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            max-width: calc(100% - var(--sidebar-width));
+            width: 100%;
+        }
+
+        .toc {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 0.5rem 0;
+        }
+
+        .toc a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .toc a:hover {
+            color: var(--primary-color);
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .algorithm {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .algorithm-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: #e2e8f0;
+            border-radius: 0.25rem;
+        }
+
+        .algorithm-content {
+            display: none;
+            padding: 1rem 0;
+        }
+
+        .algorithm-content.active {
+            display: block;
+        }
+
+        .complexity {
+            font-family: monospace;
+            background: #e2e8f0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        pre {
+            background: #1e293b;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .example {
+            background: #f8fafc;
+            padding: 1rem;
+            border-left: 4px solid var(--primary-color);
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <h2>Table of Contents</h2>
+        <ul class="toc" id="toc"></ul>
+    </nav>
+
+    <main class="content">
+        <section class="section" id="introduction">
+            <h1>File Management System</h1>
+            <p>A comprehensive implementation of a file system with hierarchical directory structure.</p>
+        </section>
+
+        <section class="section" id="problem-statement">
+            <h2>Problem Statement</h2>
+            <p>Data on every Operating System is stored in a hierarchical file system constituted of directories and subdirectories beneath them. A file management system is the program used to arrange these files, move them, and create/delete them.</p>
+            
+            <div class="features">
+                <h3>Key Features:</h3>
+                <ul>
+                    <li>Create, modify, move, copy, delete and other file operations</li>
+                    <li>Add or edit basic metadata</li>
+                </ul>
+            </div>
+        </section>
+        <img src="media/image1.png" />
+
+
+        <section class="section" id="data-structure">
+            <h2>Data Structure</h2>
+            <p>The implementation uses a modified N-ary tree structure where:</p>
+            <ul>
+                <li>Each node represents a file or directory</li>
+                <li>Directory contents are stored as linked lists</li>
+                <li>Each node maintains parent references for upward traversal</li>
+            </ul>
+            <img src="/api/placeholder/600/200" alt="Tree Structure Diagram">
+        </section>
+        <img src="media/image3.png" />
+        <section class="section" id="algorithms">
+            <h2>Algorithms</h2>
+            <div id="algorithm-list"></div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script>
+        // Algorithm data
+        const algorithms = [
+    {
+        name: 'print_tree',
+        description: 'Prints all node names from root in a form of tree',
+        timeComplexity: 'O(n)',
+        spaceComplexity: 'O(n)',
+        code: `START
+1.  if (root is not null)
+        set struct to prev_struct+branch
+        print struct+name
+        print_tree(root->child, struct)
+        print_tree(root->link, prev_struct)
+    end if
+STOP`
+    },
+    {
+        name: 'print_ls',
+        description: 'Prints all node names in a directory',
+        timeComplexity: 'O(m)',
+        spaceComplexity: 'O(1)',
+        code: `START
+1.  if (node is not null)
+        print name
+        print_ls(node->link)
+    end if
+STOP`
+    },
+    {
+        name: 'find_node',
+        description: 'Finds a node given a path from the root',
+        timeComplexity: 'O(m*h)',
+        spaceComplexity: 'O(h)',
+        code: `START
+1.  if (path is empty or root is null)
+        return root
+    end if
+2.  set child to root->child
+3.  while (child is not null)
+        if (child->name matches first element in path)
+            return find_node(child, path without first element)
+        end if
+        child = child->link
+    end while
+4.  return null
+STOP`
+    },
+    {
+        name: 'mkdir',
+        description: 'Creates a directory at the given path',
+        timeComplexity: 'O(m*h)',
+        spaceComplexity: 'O(1)',
+        code: `START
+1.  set parent to find_node(root, pwd, path_to_parent)
+2.  if (parent is null or parent->type is not directory)
+        print invalid path
+        return
+    end if
+3.  if (child with same name exists under parent)
+        print directory already exists
+        return
+    end if
+4.  create new directory node under parent
+STOP`
+    },
+    {
+        name: 'touch',
+        description: 'Creates a file at the given path',
+        timeComplexity: 'O(m*h)',
+        spaceComplexity: 'O(1)',
+        code: `START
+1.  set parent to find_node(root, pwd, path_to_parent)
+2.  if (parent is null or parent->type is not directory)
+        print invalid path
+        return
+    end if
+3.  if (child with same name exists under parent)
+        print file already exists
+        return
+    end if
+4.  create new file node under parent
+STOP`
+    },
+    {
+        name: 'rm',
+        description: 'Deletes a file or directory at the given path',
+        timeComplexity: 'O(m*h)',
+        spaceComplexity: 'O(1)',
+        code: `START
+1.  set parent to find_node(root, pwd, path_to_parent)
+2.  if (parent is null or parent->type is not directory)
+        print invalid path
+        return
+    end if
+3.  find and remove child with matching name under parent
+4.  free memory for the removed node
+STOP`
+    },
+    {
+        name: 'cat',
+        description: 'Prints the content of a file',
+        timeComplexity: 'O(m*h)',
+        spaceComplexity: 'O(1)',
+        code: `START
+1.  set node to find_node(root, pwd, path)
+2.  if (node is null or node->type is not file)
+        print invalid file path
+        return
+    end if
+3.  print node->content
+STOP`
+    },
+    {
+        name: 'edit',
+        description: 'Allows editing the content of a file',
+        timeComplexity: 'O(m*h)',
+        spaceComplexity: 'O(1)',
+        code: `START
+1.  set node to find_node(root, pwd, path)
+2.  if (node is null or node->type is not file)
+        print invalid file path
+        return
+    end if
+3.  prompt user to enter new content
+4.  set node->content to user input
+STOP`
+    },
+    {
+        name: 'chmod',
+        description: 'Modifies the permissions of a file or directory',
+        timeComplexity: 'O(m*h)',
+        spaceComplexity: 'O(1)',
+        code: `START
+1.  set node to find_node(root, pwd, path)
+2.  if (node is null)
+        print invalid path
+        return
+    end if
+3.  set node->perm to new_modes
+STOP`
+    }
+];
+
+
+        // Generate algorithm sections
+        const algorithmList = document.getElementById('algorithm-list');
+        algorithms.forEach(algo => {
+            const div = document.createElement('div');
+            div.className = 'algorithm';
+            div.innerHTML = `
+                <div class="algorithm-header" onclick="toggleAlgorithm(this)">
+                    <h3>${algo.name}</h3>
+                    <span>▼</span>
+                </div>
+                <div class="algorithm-content">
+                    <p>${algo.description}</p>
+                    <p>Time Complexity: <span class="complexity">${algo.timeComplexity}</span></p>
+                    <p>Space Complexity: <span class="complexity">${algo.spaceComplexity}</span></p>
+                    <pre><code class="language-python">${algo.code}</code></pre>
+                </div>
+            `;
+            algorithmList.appendChild(div);
+        });
+
+        // Generate TOC
+        const sections = document.querySelectorAll('section');
+        const toc = document.getElementById('toc');
+        sections.forEach(section => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `#${section.id}`;
+            a.textContent = section.querySelector('h1, h2').textContent;
+            li.appendChild(a);
+            toc.appendChild(li);
+        });
+
+        // Toggle algorithm sections
+        function toggleAlgorithm(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+            header.querySelector('span').textContent = content.classList.contains('active') ? '▼' : '▶';
+        }
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight current section in TOC
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.toc a').forEach(li => {
+                li.classList.remove('active');
+                if (li.getAttribute('href').slice(1) === current) {
+                    li.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
